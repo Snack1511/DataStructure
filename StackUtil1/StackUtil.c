@@ -17,6 +17,7 @@ char* reverseString(char* pSource) {
 		}
 
 		reString = (char*)malloc(sizeof(char) * (strlength+1));
+		// 원본 문자열의 길이보다 1이 크도록 미리 문자열을 생성해야 한다. --> 복사된 문자열의 제일 뒤에는 '\0'을 덧붙여야 한다.
 		if (reString != NULL) {
 			for (int i = 0; i < strlength; i++) {
 				*(reString + i) = (char)popLS(pStack)->data;
@@ -28,6 +29,11 @@ char* reverseString(char* pSource) {
 	deleteLNKStack(pStack);
 	return reString;
 }
+/*
+	strlen = 입력파라미터가 NULL값이 되어서는 안된다.
+	strcpy = 원본 문자열의 길이보다 1이 크도록 미리 문자열을 생성해야 한다.
+			
+*/
 
 int checkBlanketMatching(char* pSource) {
 	int ret = TRUE;
