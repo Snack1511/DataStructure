@@ -21,9 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{a4c0c725-ca22-4e38-84d6-551bf1ba3f09}</ProjectGuid>
-    <RootNamespace>My03Practice</RootNamespace>
+    <ProjectGuid>{9cdcd275-05d1-4830-a3fb-89b923df639d}</ProjectGuid>
+    <RootNamespace>ArrayStack</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>04-1_ArrayStack</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -139,20 +140,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="3-4.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="LinkedList.c" />
-    <ClCompile Include="3-5.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="MyCircularlist_headernode.c" />
-    <ClCompile Include="PolyList.c" />
+    <ClInclude Include="ArrayStack.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LinkedList.h" />
-    <ClInclude Include="MyCircularlist_headernode.h" />
-    <ClInclude Include="PolyList.h" />
+    <ClCompile Include="ArrayStack.c" />
+    <ClCompile Include="main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
