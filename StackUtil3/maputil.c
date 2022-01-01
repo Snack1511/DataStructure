@@ -9,10 +9,18 @@ int pushLSMapPosition(LNKStack* pStack, MapPosition data) {
 	node.data = data;
 	return pushLS(pStack, node);
 }
+/*
+	findPath
+	mazeArray : 지도를 표현하는 2차원 배열
+	start/endPos : 출발/도착 위치
+	pStack : 실제 앍리즘에 의해 탐색된 경로 
+		--> findPath를 호출하는 외부에서 미리 메모리를 할당하고 그 포인터를 전달해줘야 함
+		--> 즉, findPath함수는 입력과 출려그이 역할을 모두 수행하는 일종의 In-Out파라미터
+*/
 void findPath(int mazeArray[HEIGHT][WIDTH], MapPosition startPos, MapPosition endPos, LNKStack* pStack) {
 	LNKStackNode* pNode = NULL;
 	int isEmpty = FALSE, isFound = FALSE, i = 0;
-	int markArray[HEIGHT][WIDTH] = {0, };
+	int markArray[HEIGHT][WIDTH] = {0, }; // 함수 내부의 미로의 위치별 방문여부
 
 	if (pStack != NULL) {
 		MapPosition newPosition = startPos;
