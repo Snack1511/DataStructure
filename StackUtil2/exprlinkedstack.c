@@ -3,11 +3,11 @@
 #include<string.h>
 #include"exprdef.h"
 #include"exprlinkedstack.h"
-LNKStack* createLNKStack() {
-	LNKStack* pReturn = NULL;
-	pReturn = (LNKStack*)malloc(sizeof(LNKStack));
+Stack* createLNKStack() {
+	Stack* pReturn = NULL;
+	pReturn = (Stack*)malloc(sizeof(Stack));
 	if (pReturn != NULL) {
-		memset(pReturn, 0, sizeof(LNKStack));
+		memset(pReturn, 0, sizeof(Stack));
 		printf("메모리 할당 및 초기화 완료!\n");
 	}
 	else {
@@ -15,11 +15,11 @@ LNKStack* createLNKStack() {
 	}
 	return pReturn;
 }
-int pushLS(LNKStack* pStack, LNKStackNode node) {
+int Push(Stack* pStack, StackNode node) {
 	int ret = FALSE;
-	LNKStackNode* pNewNode;
+	StackNode* pNewNode;
 	if (pStack != NULL) {
-		pNewNode = (LNKStackNode*)malloc(sizeof(LNKStackNode));
+		pNewNode = (StackNode*)malloc(sizeof(StackNode));
 		if (pNewNode != NULL) {
 			*pNewNode = node;
 			pNewNode->pLink = pStack->pTop;
@@ -37,11 +37,11 @@ int pushLS(LNKStack* pStack, LNKStackNode node) {
 		printf("pushLS 스택 메모리 오류\n");
 	}
 }
-LNKStackNode* popLS(LNKStack* pStack) {
-	LNKStackNode* pReturnNode = NULL;
+StackNode* Pop(Stack* pStack) {
+	StackNode* pReturnNode = NULL;
 	if (pStack != NULL) {
-		if (isStackEmpty(pStack) == FALSE) {
-			pReturnNode = (LNKStackNode*)malloc(sizeof(LNKStackNode));
+		if (IsStackEmpty(pStack) == FALSE) {
+			pReturnNode = (StackNode*)malloc(sizeof(StackNode));
 			pReturnNode = pStack->pTop;
 			pStack->pTop = pReturnNode->pLink;
 			pReturnNode->pLink = NULL;
@@ -56,10 +56,10 @@ LNKStackNode* popLS(LNKStack* pStack) {
 	}
 	return pReturnNode;
 }
-LNKStackNode peekLS(LNKStack* pStack) {
-	LNKStackNode ReturnNode = { 0, };
+StackNode Peek(Stack* pStack) {
+	StackNode ReturnNode = { 0, };
 	if (pStack != NULL) {
-		if (isStackEmpty(pStack) == FALSE) {
+		if (IsStackEmpty(pStack) == FALSE) {
 			ReturnNode = *(pStack->pTop);
 		}
 		else {
@@ -71,9 +71,9 @@ LNKStackNode peekLS(LNKStack* pStack) {
 	}
 	return ReturnNode;
 }
-void deleteLNKStack(LNKStack* pStack) {
-	LNKStackNode* pNode = NULL;
-	LNKStackNode* pDelNode = NULL;
+void deleteLNKStack(Stack* pStack) {
+	StackNode* pNode = NULL;
+	StackNode* pDelNode = NULL;
 
 	if (pStack != NULL) {
 		pNode = pStack->pTop;
@@ -89,7 +89,7 @@ void deleteLNKStack(LNKStack* pStack) {
 		printf("스택 메모리 해제 완료\n");
 	}
 }
-int isStackEmpty(LNKStack* pStack) {
+int IsStackEmpty(Stack* pStack) {
 	int ret = FALSE;
 	if (pStack != NULL) {
 		if (pStack->currentLength <= 0) {

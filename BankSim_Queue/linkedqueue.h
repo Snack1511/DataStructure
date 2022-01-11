@@ -2,14 +2,14 @@
 #define _LINKEDQUEUE_
 #include"SimDef.h"
 
-typedef struct LinkedListQueueNodeType QueueNode;
-typedef struct LinkedListQueueType Queue;
+typedef struct BinTreeQueueNodeType QueueNode;
+typedef struct BinTreeQueueType Queue;
 
-struct LinkedListQueueNodeType {
+struct BinTreeQueueNodeType {
 	NodeData data;
 	QueueNode* pLink;
 };
-struct LinkedListQueueType {
+struct BinTreeQueueType {
 	int currentLength;
 	QueueNode Head;
 	QueueNode* pFront;

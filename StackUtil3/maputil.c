@@ -4,10 +4,10 @@
 #include"maplinkedstack.h"
 #include"maputil.h"
 
-int pushLSMapPosition(LNKStack* pStack, MapPosition data) {
-	LNKStackNode node = { 0, };
+int pushLSMapPosition(Stack* pStack, MapPosition data) {
+	StackNode node = { 0, };
 	node.data = data;
-	return pushLS(pStack, node);
+	return Push(pStack, node);
 }
 /*
 	findPath
@@ -17,8 +17,8 @@ int pushLSMapPosition(LNKStack* pStack, MapPosition data) {
 		--> findPath를 호출하는 외부에서 미리 메모리를 할당하고 그 포인터를 전달해줘야 함
 		--> 즉, findPath함수는 입력과 출려그이 역할을 모두 수행하는 일종의 In-Out파라미터
 */
-void findPath(int mazeArray[HEIGHT][WIDTH], MapPosition startPos, MapPosition endPos, LNKStack* pStack) {
-	LNKStackNode* pNode = NULL;
+void findPath(int mazeArray[HEIGHT][WIDTH], MapPosition startPos, MapPosition endPos, Stack* pStack) {
+	StackNode* pNode = NULL;
 	int isEmpty = FALSE, isFound = FALSE, i = 0;
 	int markArray[HEIGHT][WIDTH] = {0, }; // 함수 내부의 미로의 위치별 방문여부
 
@@ -29,7 +29,7 @@ void findPath(int mazeArray[HEIGHT][WIDTH], MapPosition startPos, MapPosition en
 		//입구 위치를 스택에 푸시
 		while (isEmpty == FALSE && isFound == FALSE) {
 			//움직일 다른 곳이 있고, 아직 출구를 못찾았다면 경로를 계속 찾는다.
-			pNode = popLS(pStack);
+			pNode = Pop(pStack);
 			//스택에서 위치 정보 및 방향정보 팝
 
 			if (pNode != NULL) {
@@ -80,15 +80,15 @@ void findPath(int mazeArray[HEIGHT][WIDTH], MapPosition startPos, MapPosition en
 				}//end of while
 				free(pNode);
 			}//end of if
-			isEmpty = isStackEmpty(pStack);
+			isEmpty = IsStackEmpty(pStack);
 			//더이상 움직일 위치가 있는 지 점검
 		}//end of while
 	}
 
 
 }
-void showPath(LNKStack* pStack, int mazeArray[HEIGHT][WIDTH]) {
-	LNKStackNode* pNode = NULL;
+void showPath(Stack* pStack, int mazeArray[HEIGHT][WIDTH]) {
+	StackNode* pNode = NULL;
 	int resultArray[HEIGHT][WIDTH] = { 0, };
 	int isEmpty = FALSE;
 
@@ -102,7 +102,7 @@ void showPath(LNKStack* pStack, int mazeArray[HEIGHT][WIDTH]) {
 	if (pStack != NULL) {
 		i = 0;
 		while (isEmpty == FALSE) {
-			pNode = popLS(pStack);
+			pNode = Pop(pStack);
 			if (pNode != NULL) {
 				int x = pNode->data.x;
 				int y = pNode->data.y;
@@ -117,7 +117,7 @@ void showPath(LNKStack* pStack, int mazeArray[HEIGHT][WIDTH]) {
 				i++;
 				free(pNode);
 			}
-			isEmpty = isStackEmpty(pStack);
+			isEmpty = IsStackEmpty(pStack);
 		}
 		printf("\n");
 		printf("--------------ResultArray\n");

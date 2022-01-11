@@ -1,23 +1,23 @@
 #pragma once
 #ifndef _LNKLSTSTACK_
 #define _LNKLSTSTACK_
-typedef struct LinkedListStackNodeType LNKStackNode;
-typedef struct LinkedListStackType LNKStack;
+typedef struct BinTreeStackNodeType StackNode;
+typedef struct BinTreeStackType Stack;
 
-struct LinkedListStackNodeType {
+struct BinTreeStackNodeType {
 	MapPosition data;
-	LNKStackNode* pLink;
+	StackNode* pLink;
 };
-struct LinkedListStackType {
+struct BinTreeStackType {
 	int currentLength;
-	LNKStackNode* pTop;
+	StackNode* pTop;
 };
-LNKStack* createLNKStack();
-int pushLS(LNKStack* pStack, LNKStackNode node);
-LNKStackNode* popLS(LNKStack* pStack);
-LNKStackNode peekLS(LNKStack* pStack);
-void deleteLNKStack(LNKStack* pStack);
-int isStackEmpty(LNKStack* pStack);
+Stack* createLNKStack();
+int Push(Stack* pStack, StackNode node);
+StackNode* Pop(Stack* pStack);
+StackNode Peek(Stack* pStack);
+void deleteLNKStack(Stack* pStack);
+int IsStackEmpty(Stack* pStack);
 #endif
 
 #ifndef _COMMON_LIST_DEF_

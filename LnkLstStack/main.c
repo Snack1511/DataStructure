@@ -6,23 +6,23 @@
 
 
 int main() {
-	LNKStack* pStack;
-	LNKStackNode Node;
-	LNKStackNode* pNode;
+	Stack* pStack;
+	StackNode Node;
+	StackNode* pNode;
 
 	pStack = createLNKStack();
 	Node.data = 1;
-	pushLS(pStack, Node);
+	Push(pStack, Node);
 	Node.data = 2;
-	pushLS(pStack, Node);
+	Push(pStack, Node);
 	Node.data = 3;
-	pushLS(pStack, Node);
+	Push(pStack, Node);
 
-	pNode = popLS(pStack);
+	pNode = Pop(pStack);
 	printf("Pop %d\n", pNode->data);
 	printf("Stack Length : %d\n", pStack->currentLength);
 
-	Node = peekLS(pStack);
+	Node = Peek(pStack);
 	printf("Peek %d\n", Node.data);
 	printf("Stack Length : %d\n", pStack->currentLength);
 

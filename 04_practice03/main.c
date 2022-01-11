@@ -6,7 +6,7 @@
 #include"maputil.h"
 
 int main(int argc, char* argv[]) {
-	LNKStack* pStack = NULL;
+	Stack* pStack = NULL;
 	MapPosition startPos, endPos;
 
 	int mazeArray[HEIGHT][WIDTH] = {

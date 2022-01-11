@@ -1,0 +1,100 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include"BinTree.h"
+#include"BinTreeStack.h"
+
+Stack* CreateStack() {
+	Stack* pReturn = NULL;
+	pReturn = (Stack*)malloc(sizeof(Stack));
+	if (pReturn != NULL) {
+		memset(pReturn, 0, sizeof(Stack));
+	}
+	else {
+		printf("createStack 메모리 할당 오류\n");
+	}
+	return pReturn;
+}
+int Push(Stack* pStack, StackNode node) {
+	int ret = FALSE;
+	StackNode* pNewNode;
+	if (pStack != NULL) {
+		pNewNode = (StackNode*)malloc(sizeof(StackNode));
+		if (pNewNode != NULL) {
+			*pNewNode = node;
+			pNewNode->pLink = pStack->pTop;
+			pStack->pTop = pNewNode;
+			pStack->currentLength++;
+			ret = TRUE;
+		}
+		else {
+			printf("pushLS 노드 메모리 오류\n");
+		}
+		
+	}
+	else {
+		printf("pushLS 스택 메모리 오류\n");
+	}
+}
+StackNode* Pop(Stack* pStack) {
+	StackNode* pReturnNode = NULL;
+	if (pStack != NULL) {
+		if (IsStackEmpty(pStack) == FALSE) {
+			pReturnNode = (StackNode*)malloc(sizeof(StackNode));
+			pReturnNode = pStack->pTop;
+			pStack->pTop = pReturnNode->pLink;
+			pReturnNode->pLink = NULL;
+			pStack->currentLength--;
+		}
+		else {
+			printf("popLS 언더플로우 오류\n");
+		}
+	}
+	else {
+		printf("popLS 스택 메모리 오류\n");
+	}
+	return pReturnNode;
+}
+StackNode PeekStack(Stack* pStack) {
+	StackNode ReturnNode = { 0, };
+	if (pStack != NULL) {
+		if (IsStackEmpty(pStack) == FALSE) {
+			ReturnNode = *(pStack->pTop);
+		}
+		else {
+			printf("peekLS 언더플로우 오류\n");
+		}
+	}
+	else {
+		printf("peekLs 스택 메모리 오류\n");
+	}
+	return ReturnNode;
+}
+void DeleteStack(Stack* pStack) {
+	StackNode* pNode = NULL;
+	StackNode* pDelNode = NULL;
+
+	if (pStack != NULL) {
+		pNode = pStack->pTop;
+		while (pNode != NULL) {
+			pDelNode = pNode;
+			pNode = pNode->pLink;
+			free(pDelNode);
+		}
+		//	스택 구조체 자체에 대한 메모리 해제 이전에 
+		//		저장된 노드들에 대해서 먼저 메모리 해제를 실시
+		free(pStack);
+	}
+}
+int IsStackEmpty(Stack* pStack) {
+	int ret = FALSE;
+	if (pStack != NULL) {
+		if (pStack->currentLength <= 0) {
+			ret = TRUE;
+		}
+	}
+	else {
+		printf("isStackEmpty 스택 메모리 오류\n");
+	}
+	return ret;
+}

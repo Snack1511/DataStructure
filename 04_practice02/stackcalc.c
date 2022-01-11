@@ -5,15 +5,15 @@
 #include"exprlinkedstack.h"
 #include"stackcalc.h"
 
-int pushLSExprToken(LNKStack* pStack, ExprToken data) {
-	LNKStackNode node = { 0, };
+int pushLSExprToken(Stack* pStack, ExprToken data) {
+	StackNode node = { 0, };
 	node.data = data;
-	return pushLS(pStack, node);
+	return Push(pStack, node);
 
 }
 void calcExpr(ExprToken* pExprTokens, int tokenCount) {
-	LNKStack* pStack = NULL;
-	LNKStackNode* pNode1 = NULL, * pNode2 = NULL;
+	Stack* pStack = NULL;
+	StackNode* pNode1 = NULL, * pNode2 = NULL;
 	Precedence tokenType;
 	int i = 0;
 	if (pExprTokens == NULL) {
@@ -28,9 +28,9 @@ void calcExpr(ExprToken* pExprTokens, int tokenCount) {
 				pushLSExprToken(pStack, pExprTokens[i]);
 			}
 			else {
-				pNode2 = popLS(pStack);
+				pNode2 = Pop(pStack);
 				if (pNode2 != NULL) {
-					pNode1 = popLS(pStack);
+					pNode1 = Pop(pStack);
 					if (pNode1 != NULL) {
 						float op1 = pNode1->data.value;
 						float op2 = pNode2->data.value;
@@ -64,7 +64,7 @@ void calcExpr(ExprToken* pExprTokens, int tokenCount) {
 			}
 		}
 
-		pNode1 = popLS(pStack);
+		pNode1 = Pop(pStack);
 		if (pNode1 != NULL) {
 			printf("수식 계산 결과 [%f]\n", pNode1->data.value);
 			free(pNode1);
@@ -74,8 +74,8 @@ void calcExpr(ExprToken* pExprTokens, int tokenCount) {
 	}
 }
 void convertInfixToPostfix(ExprToken* pExprToken, int tokenCount) {
-	LNKStack* pStack = NULL;
-	LNKStackNode *pNode = NULL;
+	Stack* pStack = NULL;
+	StackNode *pNode = NULL;
 	Precedence tokentype;
 	Precedence inStackTokenType;
 	int i = 0;
@@ -92,20 +92,20 @@ void convertInfixToPostfix(ExprToken* pExprToken, int tokenCount) {
 				printf("%f\n", pExprToken[i].value);
 				break;
 			case rparen:
-				pNode = popLS(pStack);
+				pNode = Pop(pStack);
 				while (pNode != NULL && pNode->data.type != lparen) {
 					printToken(pNode->data);
 					free(pNode);
-					pNode = popLS(pStack);
+					pNode = Pop(pStack);
 				}
 				if (pNode != NULL) free(pNode);
 				break;
 
 			default:
-				while (isStackEmpty(pStack) == FALSE) {
-					inStackTokenType = peekLS(pStack).data.type;
+				while (IsStackEmpty(pStack) == FALSE) {
+					inStackTokenType = Peek(pStack).data.type;
 					if (outStackPrecedence(tokentype) <= inStackPrecedence(inStackTokenType)) {
-						pNode = popLS(pStack);
+						pNode = Pop(pStack);
 						if (pNode != NULL) {
 							printToken(pNode->data);
 							free(pNode);
@@ -120,8 +120,8 @@ void convertInfixToPostfix(ExprToken* pExprToken, int tokenCount) {
 			}
 
 		}
-		while (isStackEmpty(pStack) == FALSE) {
-			pNode = popLS(pStack);
+		while (IsStackEmpty(pStack) == FALSE) {
+			pNode = Pop(pStack);
 			if (pNode != NULL) {
 				printToken(pNode->data);
 				free(pNode);
@@ -203,7 +203,7 @@ void printToken(ExprToken element) {
 ExprToken* convertExpr(char* str) {
 	int size = strlen(str);
 	int stackSize = 0;
-	LNKStack* pStack = createLNKStack();
+	Stack* pStack = createLNKStack();
 	ExprToken token = { 0, };
 	int numcnt = 0;
 	if (str != NULL) {
@@ -278,14 +278,14 @@ ExprToken* convertExpr(char* str) {
 	}
 	ExprToken* pTokens = (ExprToken*)malloc(sizeof(ExprToken)* stackSize);
 	for(int i = 0; i < stackSize; i++) {
-		*(pTokens + i) = popLS(pStack)->data;
+		*(pTokens + i) = Pop(pStack)->data;
 	}
 	return pTokens;
 }
 ExprToken* convertInfixToPostfix2(ExprToken* pExprToken, int tokenCount, int* pRetTokenCount) {
-	LNKStack* pStack = NULL;
-	LNKStack* pReverseExpr = NULL;
-	LNKStackNode* pNode = NULL;
+	Stack* pStack = NULL;
+	Stack* pReverseExpr = NULL;
+	StackNode* pNode = NULL;
 	Precedence tokentype;
 	Precedence inStackTokenType;
 	int i = 0;
@@ -303,26 +303,26 @@ ExprToken* convertInfixToPostfix2(ExprToken* pExprToken, int tokenCount, int* pR
 				printf("%f\n", pExprToken[i].value);
 				pushLSExprToken(pReverseExpr, pExprToken[i]);
 				*(pRetTokenCount) += 1;
-				printf("pReturns Top : %f\n", peekLS(pReverseExpr).data.value);
+				printf("pReturns Top : %f\n", Peek(pReverseExpr).data.value);
 				break;
 			case rparen:
-				pNode = popLS(pStack);
+				pNode = Pop(pStack);
 				while (pNode != NULL && pNode->data.type != lparen) {
 					pushLSExprToken(pReverseExpr, pNode->data);
 					*(pRetTokenCount) += 1;
 
 					printToken(pNode->data);
 					free(pNode);
-					pNode = popLS(pStack);
+					pNode = Pop(pStack);
 				}
 				if (pNode != NULL) free(pNode);
 				break;
 
 			default:
-				while (isStackEmpty(pStack) == FALSE) {
-					inStackTokenType = peekLS(pStack).data.type;
+				while (IsStackEmpty(pStack) == FALSE) {
+					inStackTokenType = Peek(pStack).data.type;
 					if (outStackPrecedence(tokentype) <= inStackPrecedence(inStackTokenType)) {
-						pNode = popLS(pStack);
+						pNode = Pop(pStack);
 						if (pNode != NULL) {
 							pushLSExprToken(pReverseExpr, pNode->data);
 							*(pRetTokenCount) += 1;
@@ -341,8 +341,8 @@ ExprToken* convertInfixToPostfix2(ExprToken* pExprToken, int tokenCount, int* pR
 			
 
 		}
-		while (isStackEmpty(pStack) == FALSE) {
-			pNode = popLS(pStack);
+		while (IsStackEmpty(pStack) == FALSE) {
+			pNode = Pop(pStack);
 			if (pNode != NULL) {
 				pushLSExprToken(pReverseExpr, pNode->data);
 				*(pRetTokenCount) += 1;
@@ -354,8 +354,8 @@ ExprToken* convertInfixToPostfix2(ExprToken* pExprToken, int tokenCount, int* pR
 		ExprToken* pReturn = (ExprToken*)malloc(sizeof(ExprToken) * (*pRetTokenCount));
 		printf("-----------------------------------\n");
 		for (int i = *(pRetTokenCount) - 1; i >= 0; i--) {
-			printToken(peekLS(pReverseExpr).data);
-			*(pReturn + i) = popLS(pReverseExpr)->data;
+			printToken(Peek(pReverseExpr).data);
+			*(pReturn + i) = Pop(pReverseExpr)->data;
 
 		}
 		printf("-----------------------------------\n");
