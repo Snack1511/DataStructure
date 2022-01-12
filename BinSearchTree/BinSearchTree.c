@@ -46,6 +46,8 @@ int InsertNode(Tree* pTree, TreeNode node) {
 	pNode = (TreeNode*)malloc(sizeof(TreeNode));
 	if (pNode != NULL) {
 		*pNode = node;
+		pNode->pLeft = NULL;
+		pNode->pRight = NULL;
 	}
 	if (pParent == NULL) {
 		pTree->pRoot = pNode;

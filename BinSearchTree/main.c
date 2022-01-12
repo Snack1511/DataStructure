@@ -79,7 +79,14 @@ int main(int argc, char* argv[])
 
 		DeleteTree(pTree);
 		
+		
+
 	}
+	printf("\n\n");
+
+	
 
 	return 0;
 }
+
+
