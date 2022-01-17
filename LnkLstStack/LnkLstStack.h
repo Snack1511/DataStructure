@@ -1,13 +1,13 @@
 #pragma once
 #ifndef _LNKLSTSTACK_
 #define _LNKLSTSTACK_
-typedef struct BinTreeStackNodeType StackNode;
-typedef struct BinTreeStackType Stack;
-struct BinTreeStackNodeType {
+typedef struct StackNodeType StackNode;
+typedef struct StackType Stack;
+struct StackNodeType {
 	int data;
 	StackNode* pLink;
 };
-struct BinTreeStackType {
+struct StackType {
 	int currentLength;
 	StackNode* pTop;
 };

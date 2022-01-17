@@ -1,13 +1,13 @@
 #ifndef _LINKEDQUEUE_
 #define _LINKEDQUEUE_
-typedef struct BinTreeQueueNodeType QueueNode;
-typedef struct BinTreeQueueType Queue;
+typedef struct QueueNodeType QueueNode;
+typedef struct QueueType Queue;
 
-struct BinTreeQueueNodeType {
+struct QueueNodeType {
 	char data;
 	QueueNode* pLink;
 };
-struct BinTreeQueueType {
+struct QueueType {
 	int currentLength;
 	QueueNode Head;
 	QueueNode* pFront;
