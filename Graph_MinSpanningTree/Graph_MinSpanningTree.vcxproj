@@ -21,10 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{54cf385b-abf6-4558-85f6-4d624a069cb8}</ProjectGuid>
-    <RootNamespace>GraphTravelsal</RootNamespace>
+    <ProjectGuid>{cfa7dc4c-2bd6-4238-9307-bb8eb1cd186e}</ProjectGuid>
+    <RootNamespace>GraphMinSpanningTree</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>08-3_GraphTravelsal</ProjectName>
+    <ProjectName>08-4_Graph_MinSpanningTree</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -140,15 +140,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ArrayGraph.c" />
-    <ClCompile Include="GraphTravelsal.c" />
-    <ClCompile Include="main.c" />
-    <ClCompile Include="UsedDataStruct.c" />
+    <ClInclude Include="ArrayGraph.h" />
+    <ClInclude Include="ArrayHeap.h" />
+    <ClInclude Include="GraphTravelsal.h" />
+    <ClInclude Include="MinSpanningTree.h" />
+    <ClInclude Include="UsedDataStruct.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArrayGraph.h" />
-    <ClInclude Include="GraphTravelsal.h" />
-    <ClInclude Include="UsedDataStruct.h" />
+    <ClCompile Include="ArrayGraph.c" />
+    <ClCompile Include="ArrayHeap.c" />
+    <ClCompile Include="GraphTravelsal.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="MinSpanningTree.c" />
+    <ClCompile Include="UsedDataStruct.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

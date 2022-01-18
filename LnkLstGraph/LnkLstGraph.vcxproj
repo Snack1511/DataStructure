@@ -21,10 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{54cf385b-abf6-4558-85f6-4d624a069cb8}</ProjectGuid>
-    <RootNamespace>GraphTravelsal</RootNamespace>
+    <ProjectGuid>{9ca1fa3a-363d-437c-b49a-7d6fd8c3b038}</ProjectGuid>
+    <RootNamespace>LnkLstGraph</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>08-3_GraphTravelsal</ProjectName>
+    <ProjectName>08-2_LnkLstGraph</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -140,15 +140,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ArrayGraph.c" />
-    <ClCompile Include="GraphTravelsal.c" />
-    <ClCompile Include="main.c" />
-    <ClCompile Include="UsedDataStruct.c" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LnkGraph.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArrayGraph.h" />
-    <ClInclude Include="GraphTravelsal.h" />
-    <ClInclude Include="UsedDataStruct.h" />
+    <ClCompile Include="LinkedList.c" />
+    <ClCompile Include="LnkGraph.c" />
+    <ClCompile Include="main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

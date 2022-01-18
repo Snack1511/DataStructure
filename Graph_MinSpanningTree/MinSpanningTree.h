@@ -1,0 +1,5 @@
+#ifndef _MINSPANNINGTREEE_
+#define _MINSPANNINGTREEE_
+
+
+#endif
