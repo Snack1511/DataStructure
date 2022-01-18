@@ -1,15 +1,15 @@
-#ifndef _ARRAYGRAPH_
-#define _ARRAYGRAPH_
+#ifndef _LNKGRAPH_
+#define _LNKGRAPH_
+
+#include"LinkedList.h"
 
 typedef struct GraphType Graph;
-
-struct GraphType
-{
-	int maxVertexCnt;
-	int curVertexCnt;
-	int GraphType;
-	int **ppAdjEdge;		//간선정보 저장용 2차배열
-	int *pVertex;			//노드저장용 1차배열
+struct GraphType {
+	int curLength;
+	int maxLength;
+	int DirectMode;
+	LinkedList** ppAdjacentList;
+	int* pVertex;
 };
 
 Graph* CreateGraph(int MaxVertCount);
@@ -26,7 +26,6 @@ int RemoveEdge(Graph* pGraph, int EnterVert, int OutVert);
 void displayGraph(Graph* pGraph);
 void DisplayLastVertex(Graph* pGraph);
 void DisplayEdge(Graph* pGraph);
-
 #endif
 
 #ifndef _COMMONDEF_
@@ -47,3 +46,4 @@ void DisplayEdge(Graph* pGraph);
 #define VISIT 1
 #define NOTVISIT 0
 #endif // !_COMMONDEF_
+

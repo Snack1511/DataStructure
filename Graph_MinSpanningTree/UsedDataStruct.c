@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include"ArrayGraph.h"
+#include"LnkGraph.h"
 #include"UsedDataStruct.h"
 Stack* createLNKStack() {
 	Stack* pReturn = NULL;

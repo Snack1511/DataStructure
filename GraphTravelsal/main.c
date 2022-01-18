@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include"ArrayGraph.h"
+#include"LnkGraph.h"
 #include"GraphTravelsal.h"
 
 #define MAXGRAPHSIZE 8

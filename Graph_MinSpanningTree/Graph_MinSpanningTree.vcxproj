@@ -140,16 +140,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ArrayGraph.h" />
     <ClInclude Include="ArrayHeap.h" />
     <ClInclude Include="GraphTravelsal.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LnkGraph.h" />
     <ClInclude Include="MinSpanningTree.h" />
     <ClInclude Include="UsedDataStruct.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArrayGraph.c" />
     <ClCompile Include="ArrayHeap.c" />
     <ClCompile Include="GraphTravelsal.c" />
+    <ClCompile Include="LinkedList.c" />
+    <ClCompile Include="LnkGraph.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="MinSpanningTree.c" />
     <ClCompile Include="UsedDataStruct.c" />

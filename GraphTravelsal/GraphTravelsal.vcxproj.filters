@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArrayGraph.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="main.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -27,15 +24,24 @@
     <ClCompile Include="UsedDataStruct.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="LinkedList.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LnkGraph.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArrayGraph.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="GraphTravelsal.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="UsedDataStruct.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LnkGraph.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
