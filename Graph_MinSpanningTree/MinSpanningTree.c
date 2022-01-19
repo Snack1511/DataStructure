@@ -17,7 +17,9 @@ Graph* Kruskal(Graph *pGraph) {
 	if (pGraph != NULL) {
 		pReturn = CreateGraph(pGraph->maxLength);
 		for (int i = 0; i < pGraph->maxLength; i++) {
-			AddVertex(pReturn, pGraph->pVertex[i]);
+			if (pGraph->pVertex[i] != NOTUSED) {
+				AddVertex(pReturn, i);
+			}
 		}//반환될 그래프 초기화 및 버텍스 추가
 		for (int i = 0; i < pGraph->maxLength; i++) {
 			maxHeapLength+=pGraph->ppAdjacentList[i]->currentElementCount;
@@ -30,9 +32,10 @@ Graph* Kruskal(Graph *pGraph) {
 				pNode = pNode->pNextNode;
 			}
 		}//최소힙 정렬
+		DisplayHeap(pMinHeap);
 		while (IsAllVertexConnect(pReturn) == FALSE) {
 			pEdgeHeapNode = DeleteHeap(pMinHeap);
-			if (FindCycle(*pGraph, *pEdgeHeapNode) == FALSE) {
+			if (pEdgeHeapNode->key != 0 && FindCycle(pReturn, *pEdgeHeapNode) == FALSE) {
 				AddEdgeWeightHeapNode(pReturn, pEdgeHeapNode);
 			}
 		}// 반환그래프에 간선 추가
@@ -47,60 +50,98 @@ int AddEdgeWeightHeapNode(Graph* pGraph, HeapNode* pNode) {
 }
 
 /*사이클 탐색 함수*/
-int FindCycle(Graph pGraph, HeapNode Node) {
+int FindCycle(Graph* pGraph, HeapNode Node) {
 	int ret = FALSE;
-	Stack* pStack = createLNKStack();
-	Graph Search = pGraph;
-	LinkedNode *pNode = NULL;
-	int* pVisitArr = (int*)malloc(sizeof(int)*Search.maxLength);
-	if (pVisitArr == NULL) {
-		printf("방문배열 생성실패\n");
-		return FALSE;
+	if (pGraph == NULL) {
+		return TRUE;
 	}
-	for (int i = 0; i < Search.maxLength; i++) {
-		pVisitArr[i] = NOTVISIT;
-	}
+	//Graph Search = *pGraph;
 
-	StackNode Stacknode = { 0, };
-	Stacknode.data = 0;
+	int* pVisitArr = (int*)malloc(sizeof(int) * pGraph->maxLength);
+	if (pVisitArr == NULL) {
+		printf("방문배열 생성 오류\n");
+	}
+	for (int i = 0; i < pGraph->maxLength; i++) {
+		pVisitArr[i] = NOTVISIT;
+	}//방문배열 초기화
+
+	Stack* pStack = createLNKStack();
+	StackNode Stacknode = {0, };
+	LinkedNode* pNode = NULL;
+
+	Stacknode.data = Node.data.InVert;
 	Push(pStack, Stacknode);
-	pVisitArr[Stacknode.data] = VISIT;
-	
-	int CurVertex = -1;
-	
+	int CurVertex = 0;
 	while (IsStackEmpty(pStack) == FALSE) {
 		CurVertex = Pop(pStack)->data;
-		if (Search.ppAdjacentList[CurVertex]->currentElementCount > 0) {
-			pNode = Search.ppAdjacentList[CurVertex]->headerNode.pNextNode;
-			while (pNode!= NULL) {
-				if (pNode->data.vertID != CurVertex) {
-					if (pVisitArr[pNode->data.vertID] == NOTVISIT) {
-						pVisitArr[pNode->data.vertID] = VISIT;
-						Stacknode.data = pNode->data.vertID;
-						Push(pStack, Stacknode);
-					}
-					else {
-						return TRUE;
-					}
-					pNode = pNode->pNextNode;
-				}
-			}
+		if (CurVertex == Node.data.OutVert) {
+			printf("현재노드%d - 시작노드%d : 간선존재\n", CurVertex, Node.data.OutVert);
+			return TRUE;
 		}
+		pNode = pGraph->ppAdjacentList[CurVertex]->headerNode.pNextNode;
+		while (pNode != NULL)
+		{
+			if(pVisitArr[pNode->data.vertID] != VISIT){
+				Stacknode.data = pNode->data.vertID;
+				Push(pStack, Stacknode);
+				pVisitArr[pNode->data.vertID] = VISIT;
+			}
+			pNode = pNode->pNextNode;
+		}
+		
+
 	}
-	
+	deleteLNKStack(pStack);
+	free(pVisitArr);
 	//DFS or BFS 사용
 	return ret;
 }
 /*그래프 내 전체 노드 연결확인 함수*/
 int IsAllVertexConnect(Graph *pGraph) {
-	int ret = TRUE;
+	int ret = FALSE;
+	if (pGraph == NULL) {
+		return ret;
+	}
+	//Graph Search = *pGraph;
+
+	int* pVisitArr = (int*)malloc(sizeof(int) * pGraph->maxLength);
+	if (pVisitArr == NULL) {
+		printf("방문배열 생성 오류\n");
+	}
 	for (int i = 0; i < pGraph->maxLength; i++) {
-		if (pGraph->pVertex[i] != NOTUSED) {
-			if (pGraph->ppAdjacentList[i]->currentElementCount <= 0) {
-				ret = FALSE;
-				break;
+		pVisitArr[i] = NOTVISIT;
+	}//방문배열 초기화
+
+	Stack* pStack = createLNKStack();
+	StackNode Stacknode = { 0, };
+	LinkedNode* pNode = NULL;
+
+	Stacknode.data = 0;
+	Push(pStack, Stacknode);
+	pVisitArr[0] = VISIT;
+
+	int CurVertex = 0;
+	while (IsStackEmpty(pStack) == FALSE) {
+		CurVertex = Pop(pStack)->data;
+		pNode = pGraph->ppAdjacentList[CurVertex]->headerNode.pNextNode;
+		while (pNode != NULL) {
+			if (pVisitArr[pNode->data.vertID] == NOTVISIT) {
+				Stacknode.data = pNode->data.vertID;
+				Push(pStack, Stacknode);
+				pVisitArr[pNode->data.vertID] = VISIT;
 			}
+			pNode = pNode->pNextNode;
 		}
 	}
+	int NodeCount = 0;
+	for (int i = 0; i < pGraph->maxLength; i++) {
+		if (pVisitArr[i] == VISIT) {
+			NodeCount++;
+		}
+	}
+	if (NodeCount == pGraph->curLength) {
+		ret = TRUE;
+	}
+
 	return ret;
 }

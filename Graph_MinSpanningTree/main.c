@@ -1,7 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include"LinkedList.h"
+#include"UsedDataStruct.h"
 #include"LnkGraph.h"
-#include"GraphTravelsal.h"
+#include"ArrayHeap.h"
+#include"MinSpanningTree.h"
 
 #define MAXGRAPHSIZE 6
 
@@ -25,7 +28,8 @@ int main() {
 
 		printf("G : \n");
 		DisplayEdge(pG);
-
+		pMST_Kruskal = Kruskal(pG);
+		DisplayEdge(pMST_Kruskal);
 	}
 	
 

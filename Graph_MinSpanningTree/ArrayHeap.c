@@ -51,7 +51,12 @@ HeapNode* DeleteHeap(Heap* pHeap) {
 	if (pHeap != NULL) {
 		pReturn = (HeapNode*)malloc(sizeof(HeapNode));
 		if (pReturn != NULL) {
-			*pReturn = pHeap->HeapArray[1];
+			if (pHeap->currentLength > 0) {
+				*pReturn = pHeap->HeapArray[1];
+			}
+			else {
+				return pReturn;
+			}
 		}
 		pHeap->HeapArray[1] = pHeap->HeapArray[pHeap->currentLength - 1];
 		pHeap->HeapArray[pHeap->currentLength - 1] = tmp;
@@ -81,5 +86,14 @@ HeapNode CreateEdgeNodeData(int Invert, int Outvert, int weight) {
 	ReturnNode.data.InVert = Invert;
 	ReturnNode.data.OutVert = Outvert;
 	ReturnNode.key = weight;
+	return ReturnNode;
+}
 
+void DisplayHeap(Heap* pHeap) {
+	if (pHeap != NULL) {
+		for (int i = 1; i < pHeap->currentLength; i++) {
+			printf("[%d] Key : %d    Data1 : %d    Data2 : %d\n", i, pHeap->HeapArray[i].key, pHeap->HeapArray[i].data.InVert, pHeap->HeapArray[i].data.OutVert);
+		}
+		printf("\n");
+	}
 }

@@ -22,6 +22,8 @@ void DeleteHeapArray(Heap* pHeap);
 void InsertHeapNode(Heap* pHeap, HeapNode node);
 HeapNode* DeleteHeap(Heap* pHeap);
 HeapNode CreateEdgeNodeData(int Invert, int Outvert, int weight);
+void DisplayHeap(Heap* pHeap);
+
 #endif
 
 #ifndef _COMMON_LIST_DEF_

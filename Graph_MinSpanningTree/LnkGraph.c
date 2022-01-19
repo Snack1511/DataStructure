@@ -125,7 +125,7 @@ int RemoveEdge(Graph* pGraph, int EnterVert, int OutVert){
 		}
 	}
 	return ret;
-}//π∫∞° ¿ÃªÛ«‘
+}
 
 
 void displayGraph(Graph* pGraph);
@@ -139,5 +139,5 @@ void DisplayEdge(Graph* pGraph) {
 		else {
 			printf("\n");
 		}
-}
+	}
 }
