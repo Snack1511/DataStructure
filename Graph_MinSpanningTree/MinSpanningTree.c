@@ -43,7 +43,11 @@ Graph* Kruskal(Graph *pGraph) {
 	}
 	return pReturn;
 }
+Graph* Prim(Graph* pGraph) {
+	Graph* pReturn = NULL;
 
+	return pReturn;
+}
 
 int AddEdgeWeightHeapNode(Graph* pGraph, HeapNode* pNode) {
 	return AddEdgeWeigt(pGraph, pNode->data.InVert, pNode->data.OutVert, pNode->key);
