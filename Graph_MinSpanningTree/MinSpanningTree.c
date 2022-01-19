@@ -51,8 +51,43 @@ int FindCycle(Graph pGraph, HeapNode Node) {
 	int ret = FALSE;
 	Stack* pStack = createLNKStack();
 	Graph Search = pGraph;
-	
+	LinkedNode *pNode = NULL;
+	int* pVisitArr = (int*)malloc(sizeof(int)*Search.maxLength);
+	if (pVisitArr == NULL) {
+		printf("방문배열 생성실패\n");
+		return FALSE;
+	}
+	for (int i = 0; i < Search.maxLength; i++) {
+		pVisitArr[i] = NOTVISIT;
+	}
 
+	StackNode Stacknode = { 0, };
+	Stacknode.data = 0;
+	Push(pStack, Stacknode);
+	pVisitArr[Stacknode.data] = VISIT;
+	
+	int CurVertex = -1;
+	
+	while (IsStackEmpty(pStack) == FALSE) {
+		CurVertex = Pop(pStack)->data;
+		if (Search.ppAdjacentList[CurVertex]->currentElementCount > 0) {
+			pNode = Search.ppAdjacentList[CurVertex]->headerNode.pNextNode;
+			while (pNode!= NULL) {
+				if (pNode->data.vertID != CurVertex) {
+					if (pVisitArr[pNode->data.vertID] == NOTVISIT) {
+						pVisitArr[pNode->data.vertID] = VISIT;
+						Stacknode.data = pNode->data.vertID;
+						Push(pStack, Stacknode);
+					}
+					else {
+						return TRUE;
+					}
+					pNode = pNode->pNextNode;
+				}
+			}
+		}
+	}
+	
 	//DFS or BFS 사용
 	return ret;
 }
