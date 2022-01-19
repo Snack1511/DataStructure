@@ -1,10 +1,15 @@
 #ifndef _ARRAYHEAP_
 #define _ARRAYHEAP_
+typedef struct EdgeDataType Data;
 typedef struct ArrayHeapNodeType HeapNode;
 typedef struct ArrayHeapType Heap;
+struct EdgeDataType {
+	int InVert;
+	int OutVert;
+};
 struct ArrayHeapNodeType {
 	int key;
-	char data;
+	Data data;
 };
 struct ArrayHeapType {
 	int maxLength;
@@ -16,6 +21,7 @@ Heap* CreateHeap(int MaxLength);
 void DeleteHeapArray(Heap* pHeap);
 void InsertHeapNode(Heap* pHeap, HeapNode node);
 HeapNode* DeleteHeap(Heap* pHeap);
+HeapNode CreateEdgeNodeData(int Invert, int Outvert, int weight);
 #endif
 
 #ifndef _COMMON_LIST_DEF_

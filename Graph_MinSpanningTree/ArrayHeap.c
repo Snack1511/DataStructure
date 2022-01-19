@@ -75,3 +75,11 @@ HeapNode* DeleteHeap(Heap* pHeap) {
 
 	return pReturn;
 }
+
+HeapNode CreateEdgeNodeData(int Invert, int Outvert, int weight) {
+	HeapNode ReturnNode = { 0, };
+	ReturnNode.data.InVert = Invert;
+	ReturnNode.data.OutVert = Outvert;
+	ReturnNode.key = weight;
+
+}
