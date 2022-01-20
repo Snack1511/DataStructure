@@ -3,6 +3,7 @@
 Graph* Kruskal(Graph *pGraph);
 Graph* Prim(Graph* pGraph);
 int AddEdgeWeightHeapNode(Graph* pGraph, HeapNode* pNode);
-int FindCycle(Graph* pGraph, HeapNode Node);
+int FindCycleHeapNode(Graph* pGraph, HeapNode Node);
+int FindCycle(Graph* pGraph, int Invert, int Outvert);
 int IsAllVertexConnect(Graph *pGraph);
 #endif

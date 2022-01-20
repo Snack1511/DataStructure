@@ -35,7 +35,7 @@ Graph* Kruskal(Graph *pGraph) {
 		DisplayHeap(pMinHeap);
 		while (IsAllVertexConnect(pReturn) == FALSE) {
 			pEdgeHeapNode = DeleteHeap(pMinHeap);
-			if (pEdgeHeapNode->key != 0 && FindCycle(pReturn, *pEdgeHeapNode) == FALSE) {
+			if (pEdgeHeapNode->key != 0 && FindCycleHeapNode(pReturn, *pEdgeHeapNode) == FALSE) {
 				AddEdgeWeightHeapNode(pReturn, pEdgeHeapNode);
 			}
 		}// 반환그래프에 간선 추가
@@ -45,6 +45,27 @@ Graph* Kruskal(Graph *pGraph) {
 }
 Graph* Prim(Graph* pGraph) {
 	Graph* pReturn = NULL;
+	int CurVertex = 0;
+	pReturn = CreateGraph(pGraph->maxLength);
+	LinkedNode* pNode = NULL;
+	LinkedNode *pMinNode = NULL;
+	for (int i = 0; i < pReturn->maxLength; i++) {
+		CurVertex = i;
+		AddVertex(pReturn, CurVertex);
+		pNode = pGraph->ppAdjacentList[CurVertex]->headerNode.pNextNode;
+		pMinNode = pNode;
+		while (pNode != NULL) {
+			if (pMinNode->data.weight >= pNode->data.weight && FindCycle(pReturn, CurVertex, pNode->data.vertID) == FALSE) {
+				pMinNode = pNode;
+			}
+			pNode = pNode->pNextNode;
+		}
+		if (FindCycle(pReturn, CurVertex, pMinNode->data.vertID) == FALSE) {
+			AddEdgeWeigt(pReturn, CurVertex, pMinNode->data.vertID, pMinNode->data.weight);
+		}
+	}
+
+	
 
 	return pReturn;
 }
@@ -53,8 +74,11 @@ int AddEdgeWeightHeapNode(Graph* pGraph, HeapNode* pNode) {
 	return AddEdgeWeigt(pGraph, pNode->data.InVert, pNode->data.OutVert, pNode->key);
 }
 
+int FindCycleHeapNode(Graph* pGraph, HeapNode Node) {
+	int ret = FindCycle(pGraph, Node.data.InVert, Node.data.OutVert);
+}
 /*사이클 탐색 함수*/
-int FindCycle(Graph* pGraph, HeapNode Node) {
+int FindCycle(Graph* pGraph, int Invert, int Outvert) {
 	int ret = FALSE;
 	if (pGraph == NULL) {
 		return TRUE;
@@ -73,13 +97,13 @@ int FindCycle(Graph* pGraph, HeapNode Node) {
 	StackNode Stacknode = {0, };
 	LinkedNode* pNode = NULL;
 
-	Stacknode.data = Node.data.InVert;
+	Stacknode.data = Invert;
 	Push(pStack, Stacknode);
 	int CurVertex = 0;
 	while (IsStackEmpty(pStack) == FALSE) {
 		CurVertex = Pop(pStack)->data;
-		if (CurVertex == Node.data.OutVert) {
-			printf("현재노드%d - 시작노드%d : 간선존재\n", CurVertex, Node.data.OutVert);
+		if (CurVertex == Outvert) {
+			printf("현재노드%d - 시작노드%d : 간선존재\n", CurVertex, Outvert);
 			return TRUE;
 		}
 		pNode = pGraph->ppAdjacentList[CurVertex]->headerNode.pNextNode;
@@ -149,3 +173,4 @@ int IsAllVertexConnect(Graph *pGraph) {
 
 	return ret;
 }
+

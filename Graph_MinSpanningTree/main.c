@@ -11,7 +11,7 @@
 int main() {
 	Graph* pG = CreateGraph(MAXGRAPHSIZE);
 	Graph* pMST_Kruskal = NULL;
-
+	Graph* pMST_Prim = NULL;
 	if (pG != NULL) {
 		for (int i = 0; i < MAXGRAPHSIZE; i++) {
 			AddVertex(pG, i);
@@ -28,8 +28,14 @@ int main() {
 
 		printf("G : \n");
 		DisplayEdge(pG);
+		printf("Kruskal : \n");
 		pMST_Kruskal = Kruskal(pG);
 		DisplayEdge(pMST_Kruskal);
+
+		printf("Prim : \n");
+		pMST_Prim = Prim(pG);
+		DisplayEdge(pMST_Prim);
+
 	}
 	
 
