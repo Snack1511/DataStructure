@@ -71,7 +71,7 @@ int Enqueue(Queue* pQueue, QueueNode element) {
 QueueNode* Dequeue(Queue* pQueue) {
 	QueueNode* pNode = NULL;
 	if (pQueue != NULL) {
-		if (isEmpty(pQueue) == FALSE) {
+		if (IsQueueEmpty(pQueue) == FALSE) {
 			pNode = (QueueNode*)malloc(sizeof(QueueNode));
 			if (pNode != NULL) {
 				pQueue->front = (pQueue->front + 1) % pQueue->maxLength; // º¯Çü
@@ -96,7 +96,7 @@ QueueNode* Dequeue(Queue* pQueue) {
 QueueNode* Peek(Queue* pQueue) {
 	QueueNode* pNode = NULL;
 	if (pQueue != NULL) {
-		if (isEmpty(pQueue) == FALSE) {
+		if (IsQueueEmpty(pQueue) == FALSE) {
 			pNode = &pQueue->pElements[pQueue->front+1];
 			
 		}
@@ -117,7 +117,7 @@ int isFull(Queue* pQueue) {
 		return FALSE;
 	}
 }
-int isEmpty(Queue* pQueue) {
+int IsQueueEmpty(Queue* pQueue) {
 	if (pQueue->currentLength <= 0) {
 		return TRUE;
 	}
@@ -127,7 +127,7 @@ int isEmpty(Queue* pQueue) {
 }
 void DeleteQueue(Queue* pQueue) {
 	if (pQueue != NULL) {
-		if (isEmpty(pQueue) == FALSE) {
+		if (IsQueueEmpty(pQueue) == FALSE) {
 			memset(pQueue->pElements, NULL, sizeof(QueueNode) * pQueue->maxLength);
 		}
 		pQueue->pElements = NULL;

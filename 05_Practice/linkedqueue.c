@@ -33,7 +33,7 @@ int Enqueue(Queue* pQueue, QueueNode element) {
 			pPrevNode->pLink = pNode;
 			pQueue->pRear = pNode;
 			*********************************/
-			if (isEmpty(pQueue) == TRUE) {
+			if (IsQueueEmpty(pQueue) == TRUE) {
 				pQueue->pFront = pNode;
 				pQueue->pRear = pNode;
 			}
@@ -54,7 +54,7 @@ QueueNode* Dequeue(Queue* pQueue) {
 	int ret = FALSE;
 	QueueNode* pNode = NULL;
 	if (pQueue != NULL) {
-		if (isEmpty(pQueue) == FALSE) {
+		if (IsQueueEmpty(pQueue) == FALSE) {
 			/********* My Logic *************
 			pNode = pQueue->pFront->pLink;
 			pQueue->pFront->pLink = pNode->pLink;
@@ -110,7 +110,7 @@ void DeleteQueue(Queue* pQueue) {
 
 }
 //int isFull(Queue* pQueue);
-int isEmpty(Queue* pQueue) {
+int IsQueueEmpty(Queue* pQueue) {
 	if (pQueue != NULL) {
 		if (pQueue->currentLength <= 0) {
 			return TRUE;

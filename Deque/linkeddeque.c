@@ -24,7 +24,7 @@ int InsertFront(Deque* pDeque, DequeNode element) {
 			*pNode = element;
 			pNode->pLLink = NULL;
 			pNode->pRLink = NULL;
-			if (isEmpty(pDeque) == TRUE) {
+			if (IsQueueEmpty(pDeque) == TRUE) {
 				pDeque->pFront = pNode;
 				pDeque->pRear = pNode;
 			}
@@ -51,7 +51,7 @@ int InsertRear(Deque* pDeque, DequeNode element) {
 			*pNode = element;
 			pNode->pLLink = NULL;
 			pNode->pRLink = NULL;
-			if (isEmpty(pDeque) == TRUE) {
+			if (IsQueueEmpty(pDeque) == TRUE) {
 				pDeque->pFront = pNode;
 				pDeque->pRear = pNode;
 			}
@@ -72,7 +72,7 @@ int InsertRear(Deque* pDeque, DequeNode element) {
 DequeNode* DeleteFront(Deque* pDeque) {
 	DequeNode* pReturn = NULL;
 	if (pDeque != NULL) {
-		if (isEmpty(pDeque) == FALSE) {
+		if (IsQueueEmpty(pDeque) == FALSE) {
 			pReturn = pDeque->pFront;
 			if (pDeque->currentLength == 1) {
 				pDeque->pFront = NULL;
@@ -97,7 +97,7 @@ DequeNode* DeleteFront(Deque* pDeque) {
 DequeNode* DeleteRear(Deque* pDeque) {
 	DequeNode* pReturn = NULL;
 	if (pDeque != NULL) {
-		if (isEmpty(pDeque) == FALSE) {
+		if (IsQueueEmpty(pDeque) == FALSE) {
 			pReturn = pDeque->pRear;
 			if (pDeque->currentLength == 1) {
 				pDeque->pFront = NULL;
@@ -145,8 +145,8 @@ DequeNode* PeekRear(Deque* pDeque) {
 void DeleteDeque(Deque* pDeque) {
 	DequeNode* DelNode;
 	if (pDeque != NULL) {
-		if (isEmpty(pDeque) == FALSE) {
-			while (isEmpty(pDeque) == FALSE) {
+		if (IsQueueEmpty(pDeque) == FALSE) {
+			while (IsQueueEmpty(pDeque) == FALSE) {
 				DelNode = DeleteRear(pDeque);
 				free(DelNode);
 			}
@@ -155,7 +155,7 @@ void DeleteDeque(Deque* pDeque) {
 	}
 	printf("Complete DeleteDeque\n");
 }
-int isEmpty(Deque* pDeque) {
+int IsQueueEmpty(Deque* pDeque) {
 	if (pDeque->currentLength <= 0) {
 		return TRUE;
 	}

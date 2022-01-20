@@ -26,7 +26,7 @@ typedef struct QueueNodeType QueueNode;
 typedef struct QueueType Queue;
 
 struct QueueNodeType {
-	char data;
+	int data;
 	QueueNode* pLink;
 };
 struct QueueType {

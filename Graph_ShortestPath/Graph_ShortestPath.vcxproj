@@ -140,6 +140,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graph_ShortPath.c" />
+    <ClCompile Include="LinkedList.c" />
+    <ClCompile Include="LnkGraph.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="UsedDataStructure.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Graph_ShortPath.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LnkGraph.h" />
+    <ClInclude Include="UsedDataStructure.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

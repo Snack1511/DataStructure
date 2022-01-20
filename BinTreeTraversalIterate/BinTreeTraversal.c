@@ -169,7 +169,7 @@ void LevelTraversalIterateTree(Tree* pTree) {
 	Enqueue(pQueue, InsertNode);
 
 	while (1) {
-		if (isEmpty(pQueue) == TRUE) {
+		if (IsQueueEmpty(pQueue) == TRUE) {
 			break;
 		}
 		else {

@@ -91,8 +91,8 @@ void Process(int EndTime, int OfficerNum) {
 
 void ClientArrive(Queue* pClients, Queue* pDelayQueue, int Time) {
 	QueueNode* pNode = NULL;
-	if (isEmpty(pClients) == FALSE) {
-		while (isEmpty(pClients) == FALSE&&Time == Peek(pClients)->data.ArrivalTime) {
+	if (IsQueueEmpty(pClients) == FALSE) {
+		while (IsQueueEmpty(pClients) == FALSE&&Time == Peek(pClients)->data.ArrivalTime) {
 			pNode = Dequeue(pClients);
 			printf("고객 도착\n");
 			Enqueue(pDelayQueue, *pNode);
@@ -108,8 +108,8 @@ void ServiceStart(Queue* pDelayQueue, Queue** pServiceQueue, int OfficerNum) {
 			BrakingOfficer = i;
 			break;
 		}*/
-		if (isEmpty(pServiceQueue[i]) == TRUE) {
-			if (isEmpty(pDelayQueue) == FALSE) {
+		if (IsQueueEmpty(pServiceQueue[i]) == TRUE) {
+			if (IsQueueEmpty(pDelayQueue) == FALSE) {
 				QueueNode* pNode = Dequeue(pDelayQueue);
 				for (int j= 0; j < pNode->data.ServiceTime; j++) {
 					Enqueue(pServiceQueue[i], *pNode);
@@ -132,7 +132,7 @@ void ServiceEnd(Queue* pDelayQueue, Queue** pServiceQueue, int TotalTime, int Of
 	QueueNode* pNode = NULL;
 	QueueNode* peekNode = NULL;
 	for (int i = 0; i < OfficerNum; i++) {
-		if (isEmpty(pServiceQueue[i]) == FALSE) {
+		if (IsQueueEmpty(pServiceQueue[i]) == FALSE) {
 			DisplayDelayCount(pDelayQueue);
 			if (pServiceQueue[i]->currentLength == 1) {
 				pNode = Peek(pServiceQueue[i]);
@@ -159,7 +159,7 @@ void PrintClient(QueueNode node) {
 }
 
 void SumDelayTime(Queue* pDelayQueue, float* pSum) {
-	if (isEmpty(pDelayQueue) == FALSE) {
+	if (IsQueueEmpty(pDelayQueue) == FALSE) {
 		*pSum = *pSum+ pDelayQueue->currentLength;
 	}
 }
@@ -169,7 +169,7 @@ void PrintResult(Queue* pClients, Queue* pDelay, Queue** pService, int Time, int
 	printf("=========== Result ============\n");
 	printf("소요시간 : %d\n", Time);
 	printf("평균 대기시간 : %f\n", AvgDelayTime);
-	if (isEmpty(pClients) == FALSE) {
+	if (IsQueueEmpty(pClients) == FALSE) {
 		printf("방문하지 못한 고객 : %d\n", pClients->currentLength);
 	}
 	else {
@@ -179,7 +179,7 @@ void PrintResult(Queue* pClients, Queue* pDelay, Queue** pService, int Time, int
 	printf("남은 대기인원 : %d\n", pDelay->currentLength);
 	for (int i = 0; i < Officer; i++) {
 		printf("Officer[%d] : ", i);
-		if (isEmpty(pService[i]) == FALSE) {
+		if (IsQueueEmpty(pService[i]) == FALSE) {
 			printf("서비스 중 종료된 고객 --> ");
 			PrintClient(*Peek(pService[i]));
 		}

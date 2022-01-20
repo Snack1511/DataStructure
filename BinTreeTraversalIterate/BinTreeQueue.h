@@ -20,7 +20,7 @@ QueueNode* Dequeue(Queue* pQueue);
 QueueNode* PeekQueue(Queue* pQueue);
 void DeleteQueue(Queue* pQueue);
 //int isFull(Queue* pQueue);
-int isEmpty(Queue* pQueue);
+int IsQueueEmpty(Queue* pQueue);
 
 #endif
 

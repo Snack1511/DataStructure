@@ -24,7 +24,7 @@ DequeNode* DeleteRear(Deque* pDeque);
 DequeNode* PeekFront(Deque* pDeque);
 DequeNode* PeekRear(Deque* pDeque);
 void DeleteDeque(Deque* pDeque);
-int isEmpty(Deque* pDeque);
+int IsQueueEmpty(Deque* pDeque);
 
 
 #endif

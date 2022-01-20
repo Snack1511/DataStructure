@@ -80,7 +80,7 @@ void Process(int EndTime) {
 
 void ClientArrive(Queue* pClients, Queue* pDelayQueue, int Time) {
 	QueueNode* pNode = NULL;
-	if (isEmpty(pClients) == FALSE) {
+	if (IsQueueEmpty(pClients) == FALSE) {
 		while (Time == Peek(pClients)->data.ArrivalTime) {
 			pNode = Dequeue(pClients);
 			printf("고객 도착\n");
@@ -91,8 +91,8 @@ void ClientArrive(Queue* pClients, Queue* pDelayQueue, int Time) {
 	free(pNode);
 }
 void ServiceStart(Queue* pDelayQueue, Queue* pServiceQueue) {
-	if (isEmpty(pServiceQueue) == TRUE) {
-		if (isEmpty(pDelayQueue) == FALSE) {
+	if (IsQueueEmpty(pServiceQueue) == TRUE) {
+		if (IsQueueEmpty(pDelayQueue) == FALSE) {
 			QueueNode* pNode = Dequeue(pDelayQueue);
 			for (int i = 0; i < pNode->data.ServiceTime; i++) {
 				Enqueue(pServiceQueue, *pNode);
@@ -109,7 +109,7 @@ void ServiceEnd(Queue* pDelayQueue, Queue* pServiceQueue, int TotalTime) {
 	QueueNode* pNode = NULL;
 	QueueNode* peekNode = NULL;
 
-	if (isEmpty(pServiceQueue) == FALSE) {
+	if (IsQueueEmpty(pServiceQueue) == FALSE) {
 		DisplayDelayCount(pDelayQueue);
 		if (pServiceQueue->currentLength == 1) {
 			pNode = Peek(pServiceQueue);
@@ -141,7 +141,7 @@ void PrintResult(Queue* pClients, Queue* pDelay, Queue* pService, int Time) {
 	printf("\n\n");
 	printf("=========== Result ============\n");
 	printf("소요시간 : %d\n", Time);
-	if (isEmpty(pClients) == FALSE) {
+	if (IsQueueEmpty(pClients) == FALSE) {
 		printf("방문하지 못한 고객 : %d\n", pClients->currentLength);
 	}
 	else {
@@ -149,7 +149,7 @@ void PrintResult(Queue* pClients, Queue* pDelay, Queue* pService, int Time) {
 
 	}
 	printf("남은 대기인원 : %d\n", pDelay->currentLength);
-	if (isEmpty(pService) == FALSE) {
+	if (IsQueueEmpty(pService) == FALSE) {
 		printf("서비스 중 종료된 고객 --> ");
 		PrintClient(*Peek(pService));
 	}

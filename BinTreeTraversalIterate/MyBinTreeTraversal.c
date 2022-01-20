@@ -147,7 +147,7 @@ void LevelTraversalIterateTreeNode(TreeNode* pTreeNode) {
 	CheckNode.data = pNextNode;
 	Enqueue(pCheckQueue, CheckNode);
 
-	while (isEmpty(pCheckQueue) == FALSE) {
+	while (IsQueueEmpty(pCheckQueue) == FALSE) {
 		pNextNode = Dequeue(pCheckQueue)->data;
 		if (pNextNode->pLeftChild != NULL) {
 			CheckNode.data = pNextNode->pLeftChild;
