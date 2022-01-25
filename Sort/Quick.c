@@ -1,30 +1,63 @@
 #include<stdio.h>
-int QuickSort(int* Arr, int start, int end);
+#include<stdlib.h>
+#include<time.h>
+#define MAX 20
+void QuickSort(int* Arr, int start, int end);
 void PrintArr(int* Arr, int length);
 int main() {
-
-	int arr[8] = { 70, 40, 30, 10, 23, 60, 20, 50 };//32
+	srand((unsigned)time(NULL));
+	int arr[MAX]; //= { 10, 70, 23, 60, 20, 40, 30, 50 };
 	int* ptest = NULL;
-
-	int SortSuccess = 0;
-	SortSuccess = QuickSort(arr, 0, 8);//32
-	PrintArr(arr, 8);
+	for (int i = 0; i < MAX; ++i) {
+		arr[i] = (i + rand())%MAX;
+	}
+	PrintArr(arr, MAX);
+	QuickSort(arr, 0, MAX-1);
+	PrintArr(arr, MAX);
 	return 0;
 }
 
-int QuickSort(int* Arr, int left, int right) {
+void QuickSort(int* Arr, int left, int right) {
 	int pivot = left;
-	for (int i = left; i < right; ++i) {
-		if (Arr[pivot] < Arr[i]) {
-
+	int rightidx = right, leftidx = pivot + 1;
+	int tmp = 0;
+	if (left < right) {
+		while (rightidx > leftidx) {
+			
+			if (Arr[leftidx] > Arr[rightidx]) {
+				tmp = Arr[rightidx];
+				Arr[rightidx] = Arr[leftidx];
+				Arr[leftidx] = tmp;
+			}
+			else {
+				if (Arr[pivot] > Arr[leftidx]) {
+					leftidx++;
+				}
+				if (Arr[pivot] <= Arr[rightidx]) {
+					rightidx--;
+				}
+			}
 		}
-	}
+		if (Arr[rightidx] < Arr[pivot]) {
+			tmp = Arr[rightidx];
+			Arr[rightidx] = Arr[pivot];
+			Arr[pivot] = tmp;
+		}
 
+		PrintArr(Arr, MAX-1);
+
+		QuickSort(Arr, left, rightidx -1);
+		QuickSort(Arr, rightidx, right);
+	}
 }
 
 void PrintArr(int* Arr, int length) {
 	for (int i = 0; i < length; ++i) {
-		printf("%d      ", Arr[i]);
+		printf("%d ", Arr[i]);
+		if ((i + 1) % 10 == 0) {
+			printf("\n");
+		}
 	}
-	printf("\n");
+	printf("\n\n");
+
 }

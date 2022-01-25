@@ -24,5 +24,11 @@
     <ClCompile Include="Quick.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Insert.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Shell.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
