@@ -20,9 +20,20 @@ int main() {
 
 void ShellSort(int* Arr, int length) {
 	
-
-	PrintArr(Arr, length);
-}
+	for (int demp = length; demp > 0; demp = demp / 2) {
+		printf("Demp : %d ===================================\n", demp);
+		for (int i = 1; i <= demp && demp < length; ++i) {
+			printf("[%d] ------------- \n", i);
+			for (int j = length - i; j >= demp; j = j - demp) {
+				if (Arr[j - demp] > Arr[j]) {
+					Swap(Arr + j, Arr + (j - demp));
+					PrintArr(Arr, length);
+					j = length - i;
+				}
+			}
+		}
+	}
+}//π∫∞°...π∫∞° ¿ÃªÛ«‘...
 void Swap(int* pTarget_A, int* pTarget_B) {
 	int tmp = 0;
 	tmp = *pTarget_A;
@@ -32,7 +43,7 @@ void Swap(int* pTarget_A, int* pTarget_B) {
 
 void PrintArr(int* Arr, int length) {
 	for (int i = 0; i < length; ++i) {
-		printf("%d ", Arr[i]);
+		printf("%2d ", Arr[i]);
 		if ((i + 1) % 10 == 0) {
 			printf("\n");
 		}
