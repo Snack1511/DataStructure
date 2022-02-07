@@ -1,6 +1,8 @@
 #ifndef _HASHTABLE_
 #define _HASHTABLE_
-
+/*
+	다시짜야함
+*/
 typedef struct HashTableType HashTable;
 struct HashTableType {
 	int* pArrHashTable;
