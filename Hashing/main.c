@@ -3,6 +3,12 @@
 #include"HashTable.h"
 #define MAXSIZE 10
 
+void Swap(int* pA, int* pB) {
+	int tmp = *pA;
+	*pA = *pB;
+	*pB = tmp;
+}
+
 void QuickSort(int* Arr, int left, int right) {
 	int pivot = left;
 	int rightidx = right, leftidx = pivot + 1;
@@ -43,18 +49,27 @@ int main() {
 	HashTable* pArrHashTable = CreateHashTable(MAXSIZE);
 
 	for (int i = 0; MAXSIZE > i; ++i) {
-		Arr[i] = rand() % MAXSIZE;
+		Arr[i] = i + (rand() % MAXSIZE + i) ;
+	}
+	for (int i = 0; i < MAXSIZE; ++i) {
+		Swap(Arr+i, Arr + rand() % MAXSIZE);
+	}
+	for (int i = 0; i < MAXSIZE; ++i) {
 		InsertHashElement(pArrHashTable, Arr[i], i);
 	}
 	int iTargetIdx = 0;
-	QuickSort(Arr, 0, MAXSIZE - 1);
+	//QuickSort(Arr, 0, MAXSIZE - 1);
 	for (int i = 0; MAXSIZE > i; ++i) {
 		printf("%d   ", Arr[i]);
 	}
 	printf("\n\n");
-	iTargetIdx = GetHashIndex(pArrHashTable, 5);
+	int iSearchValue = 0;
+	printf("탐색할 값 입력 : ");
+	scanf_s("%d", &iSearchValue);
+	iTargetIdx = GetHashIndex(pArrHashTable, Arr, iSearchValue);
 	printf("[%d]  %d\n", iTargetIdx, Arr[iTargetIdx]);
 
+	DeleteHashTable(pArrHashTable);
 
 	return 0;
 }
