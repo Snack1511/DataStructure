@@ -20,10 +20,10 @@ int ReleaseCollision(HashTable* pHashTable, int iIndex);
 int DoubleHashingDest(int iIndex, int iTableSize);
 
 // 해시테이블 자료 추가
-void InsertHashElement(HashTable* pHashTable, int iValue, int iKey);
+void InsertHashElement(HashTable* pHashTable, int iValue);
 
 // 해시테이블 자료 검색
-int GetHashIndex(HashTable* pHashTable, int* pArr, int iValue);
+int GetHashValue(HashTable* pHashTable, int iValue, int* getretIndex);
 
 // 해시테이블 자료 삭제
 void DeleteHashElement(HashTable* pHashTable, int iValue);

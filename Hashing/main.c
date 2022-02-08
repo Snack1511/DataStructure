@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<time.h>
 #include"HashTable.h"
-#define MAXSIZE 10
+#define MAXSIZE 11
 
 void Swap(int* pA, int* pB) {
 	int tmp = *pA;
@@ -52,10 +52,10 @@ int main() {
 		Arr[i] = i + (rand() % MAXSIZE + i) ;
 	}
 	for (int i = 0; i < MAXSIZE; ++i) {
-		Swap(Arr+i, Arr + rand() % MAXSIZE);
+		Swap(Arr+i, Arr + (rand() % MAXSIZE));
 	}
 	for (int i = 0; i < MAXSIZE; ++i) {
-		InsertHashElement(pArrHashTable, Arr[i], i);
+		InsertHashElement(pArrHashTable, Arr[i]);
 	}
 	int iTargetIdx = 0;
 	//QuickSort(Arr, 0, MAXSIZE - 1);
@@ -63,11 +63,16 @@ int main() {
 		printf("%d   ", Arr[i]);
 	}
 	printf("\n\n");
+
+	for (int i = 0; MAXSIZE > i; ++i) {
+		printf("%d   ", pArrHashTable->pArrHashTable[i]);
+	}
+	printf("\n\n");
 	int iSearchValue = 0;
 	printf("탐색할 값 입력 : ");
 	scanf_s("%d", &iSearchValue);
-	iTargetIdx = GetHashIndex(pArrHashTable, Arr, iSearchValue);
-	printf("[%d]  %d\n", iTargetIdx, Arr[iTargetIdx]);
+	int value = GetHashValue(pArrHashTable, iSearchValue, &iTargetIdx);
+	printf("[%d]  %d\n", iTargetIdx, value);
 
 	DeleteHashTable(pArrHashTable);
 
